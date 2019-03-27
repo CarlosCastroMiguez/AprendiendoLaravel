@@ -38,13 +38,21 @@ class HomeController extends Controller
         //Incident::create($request->all());
         
         $rules = [
-            'category_id' => 'required',
+            'category_id' => 'sometimes|exists:categories,id',
             'severity' => 'required|in:M,N,A',
             'title' => 'required|min:5',
             'description' => 'required|min:15',
         ];
+        
+        $messages = [
+            'category_id.exists' => 'La categoria seleccionada no existe en nuestra BBDD',
+            'title.required' => 'Es necesario ingresar un título para la incidencia',
+            'title.min' => 'El titulo debe presentar al menos 5 caracteres', 
+            'description.required' => 'Es necesario ingresar una descripción para la incidencia',
+            'description.min' => 'La descripción debe presentar al menos 15 caracteres', 
+        ];
         //si la validacion no se cumple no se avanza
-        $this->validate($request, $rules );
+        $this->validate($request, $rules, $messages );
         
         //Forma 2 de crear incident:
         $incident = new Incident();
