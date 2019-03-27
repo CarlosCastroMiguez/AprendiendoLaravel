@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/report','HomeController@report');
+Route::get('/report','HomeController@getReport');
+Route::post('/report','HomeController@postReport');
 
 
 

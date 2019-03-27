@@ -7,11 +7,15 @@
 
     <div class="card-body">
 
-        <form action="">
+        <form action="" method="POST">
+            {{ csrf_field() }}
             <div class="form-group">
                 <label for="category_id">Categoria</label>
                 <select name="category_id" class="form-control">
-                    
+                    <option value="0"> General</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category -> id }}"> {{$category->name}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group">
@@ -24,11 +28,11 @@
             </div>
             <div class="form-group">
                 <label for="title">Titulo</label>
-                <input name="title" name="title" class="form-control"></input>
+                <input name="title" name="title" class="form-control" required></input>
             </div>
             <div class="form-group">
                 <label for="description">Descripción</label>
-                <textarea name="description" class="form-control"></textarea>
+                <textarea name="description" class="form-control" required></textarea>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary">Registrar incidencia</button>
