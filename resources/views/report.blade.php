@@ -6,6 +6,15 @@
     <div class="card-header">Reports</div>
 
     <div class="card-body">
+        @if(count($errors)>0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <form action="" method="POST">
             {{ csrf_field() }}
@@ -14,7 +23,7 @@
                 <select name="category_id" class="form-control">
                     <option value="0"> General</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category -> id }}"> {{$category->name}}</option>
+                    <option value="{{ $category -> id }}"> {{$category->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -28,17 +37,17 @@
             </div>
             <div class="form-group">
                 <label for="title">Titulo</label>
-                <input name="title" name="title" class="form-control" required></input>
+                <input name="title" name="title" class="form-control" value="{{ old('title') }}" required></input>
             </div>
             <div class="form-group">
                 <label for="description">Descripción</label>
-                <textarea name="description" class="form-control" required></textarea>
+                <textarea name="description" class="form-control" required>{{ old('description') }}</textarea>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary">Registrar incidencia</button>
-                
+
             </div>
-            
+
         </form>
 
     </div>

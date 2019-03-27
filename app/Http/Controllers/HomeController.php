@@ -34,10 +34,19 @@ class HomeController extends Controller
         return view('report')->with(compact('categories'));
     }
     public function postReport(Request $request) {
-        //Forma 1 de crear incident: Incident::create();
+        //Forma 1 de crear incident: 
+        //Incident::create($request->all());
+        
+        $rules = [
+            'category_id' => 'required',
+            'severity' => 'required|in:M,N,A',
+            'title' => 'required|min:5',
+            'description' => 'required|min:15',
+        ];
+        //si la validacion no se cumple no se avanza
+        $this->validate($request, $rules );
         
         //Forma 2 de crear incident:
-        
         $incident = new Incident();
         $incident->category_id = $request->input('category_id') ?: null;
         $incident->severity = $request->input('severity');
@@ -53,4 +62,3 @@ class HomeController extends Controller
         
     }
 }
-
