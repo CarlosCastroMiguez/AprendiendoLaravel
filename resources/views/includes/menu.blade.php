@@ -16,7 +16,7 @@
             <a href="{{ url('/report') }}" class="list-group-item list-group-item @if(request()->is('report')) active @endif">
                 Reportar incidencias
             </a>
-                @if (auth()->user()-> role == 0)
+                @if (auth()->user()->is_admin)
                 <a href="{{ url('/usuarios') }}" class="list-group-item list-group-item @if(request()->is('usuarios')) active @endif">
                     Usuarios
                 </a>
