@@ -17,15 +17,20 @@
                 Reportar incidencias
             </a>
                 @if (auth()->user()->is_admin)
-                <a href="{{ url('/usuarios') }}" class="list-group-item list-group-item @if(request()->is('usuarios')) active @endif">
-                    Usuarios
-                </a>
-                <a href="{{ url('/proyectos') }}" class="list-group-item list-group-item @if(request()->is('proyectos')) active @endif">
-                    Proyectos
-                </a>
-                <a href="{{ url('/config') }}" class="list-group-item list-group-item @if(request()->is('config')) active @endif">
-                    Configuración
-                </a>
+                
+                <ul class="list-group-item list-group-flush @if(request()->is('agregarsala')) active @endif @if(request()->is('agregarprofesor')) active @endif @if(request()->is('agregarasignatura')) active @endif">
+                    <a class="nav-item dropdown">
+                        <a class="nav-link- dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrar</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/usuarios">Usuarios</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/proyectos"> Proyectos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/config">Configuración</a>
+                        </div>
+                    </a>
+
+                </ul>
                 @endif
             @else
             <a href="{{ url('/') }}" class="list-group-item list-group-item @if(request()->is('/')) active @endif">
