@@ -9,6 +9,11 @@ use App\Level;
 
 class LevelController extends Controller
 {
+    public function byProject($id){
+        
+        return Level::where('project_id', $id)->get();
+    }
+    
     public function store(Request $request)
     {   
         $this->validate($request, ['name' => 'required'], ['name.required' => 'El nombre es requerido'] );  

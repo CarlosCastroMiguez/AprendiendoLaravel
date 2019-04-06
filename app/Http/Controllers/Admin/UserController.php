@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Project;
 class UserController extends Controller
 {
      public function index()
@@ -50,7 +51,8 @@ class UserController extends Controller
      public function edit($id)
     {
         $user = User::find($id);
-        return view('Admin.users.edit')->with(compact('user'));
+        $projects = Project::all();
+        return view('Admin.users.edit')->with(compact('user', 'projects'));
     }
      public function update($id, Request $request)
     {

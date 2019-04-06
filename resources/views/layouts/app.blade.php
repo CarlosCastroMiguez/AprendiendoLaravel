@@ -35,17 +35,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <form class="navbar-form">
-                            <div class="form-group">
-                                <select name="" class="form-control">
-                                    <option value=""> Proyecto A</option>
-                                </select>
-                            </div>
+                    
+                    @if(Auth()->check())
+                        <ul class="navbar-nav mr-auto">
+                            <form class="navbar-form">
+                                <div class="form-group">
+                                    <select name="" class="form-control">
+                                        <option value=""> Proyecto A</option>
+                                    </select>
+                                </div>
 
-                        </form>
-                    </ul>
-
+                            </form>
+                        </ul>
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
