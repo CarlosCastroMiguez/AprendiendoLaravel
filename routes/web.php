@@ -53,7 +53,9 @@ Route::group(['middleware' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/nivel/editar','LevelController@update');
     Route::get('/nivel/{id}/eliminar','LevelController@delete');
     
-        
+    //Project-User
+    Route::post('/proyecto-usuario','ProjectUserController@store'); 
+    Route::get('/proyecto-usuario/{id}/eliminar','ProjectUserController@delete');
     
     Route::get('/config','ConfigController@index');
 });
