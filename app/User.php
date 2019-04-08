@@ -23,19 +23,35 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    
     protected $hidden = [
         'password', 'remember_token',
     ];
     
+    //Relaciones 
+    
+    public function projects(){
+        
+        return $this->belongsToMany('App\Project');
+        
+    }
+    
+    
+    
+    //accesors
     public function getIsAdminAttribute(){
         return $this->role == 0;
     }
     public function getIsClientAttribute(){
         return $this->role == 2;
+    }
+    
+    public function getListOfProjectsAttribute(){
+        //si es soporte
+        if($this->role == 1)
+            return $this->projects;
+        
+        //si es cliente o admin
+        return Project::all();
     }
 }

@@ -16,13 +16,21 @@ class Project extends Model
         'start' => 'date',
 
     ];
-
+    
     public static $messages = [
         'name.required' => 'Es necesario ingresar un nombre',
         'start.date' => 'La fecha no tiene un formato adecuado',
 
     ];
-
+    
+    //Relaciones
+    public function users(){
+        
+        return $this->belongsToMany('App\User');
+        
+    }
+    
+    
     //campos que se pueden agregar de forma masiva en project controller Project::create($request->all());   
     protected $fillable = [
         'name', 'description', 'start',

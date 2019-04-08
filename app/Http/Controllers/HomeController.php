@@ -28,6 +28,17 @@ class HomeController extends Controller
     {
         return view('home', ['name' => Auth::user()->name ]);
     }
+    
+    public function selectProject($id){
+        
+        $user = auth()->user();
+        $user->selected_project_id = $id;
+        $user->save();
+        
+        return back();
+        
+    }
+    
     public function getReport() {
         
         $categories = Category::where('project_id', 1)-> get();
