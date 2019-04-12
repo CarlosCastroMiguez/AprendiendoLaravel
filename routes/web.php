@@ -20,8 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/seleccionar/proyecto/{id}', 'HomeController@selectProject');
 
-Route::get('/report','HomeController@getReport');
-Route::post('/report','HomeController@postReport');
+Route::get('/report','IncidentController@create');
+Route::post('/report','IncidentController@store');
 
 
 

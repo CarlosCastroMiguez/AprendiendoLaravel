@@ -45,4 +45,10 @@ class Project extends Model
         
         return $this->hasMany('App\Level');
     }
+    
+     public function getFirstLevelIdAttribute(){
+         
+        return $this->levels->first()->id;        
+        
+    }
 }

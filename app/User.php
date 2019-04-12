@@ -45,6 +45,9 @@ class User extends Authenticatable
     public function getIsClientAttribute(){
         return $this->role == 2;
     }
+    public function getIsSupportAttribute(){
+        return $this->role == 1;
+    }
     
     public function getListOfProjectsAttribute(){
         //si es soporte
