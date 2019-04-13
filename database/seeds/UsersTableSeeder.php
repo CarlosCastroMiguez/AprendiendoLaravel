@@ -23,14 +23,7 @@ class UsersTableSeeder extends Seeder
             'role'=> 0
             
         ]);
-        //support
-        User::create([
-            'name'=> 'support',
-            'email'=> 'support@support.com',
-            'password'=> bcrypt('support'),
-            'role'=> 1
-            
-        ]);
+        
         //client
         User::create([
             'name'=> 'client',

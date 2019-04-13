@@ -30,10 +30,14 @@
                     <tbody id="dashboard_my_incidents">
                         @foreach($my_incidents as $incident)
                         <tr>
-                            <td>{{ $incident->id }}</td>
+                            <td>
+                                <a href="/ver/{{ $incident->id }}">
+                                    {{ $incident->id }}
+                                </a>
+                            </td>
                             <td>{{ $incident->category->name }}</td>
                             <td>{{ $incident->severity_full }}</td>
-                            <td>{{ $incident->id }}</td>
+                            <td>{{ $incident->state }}</td>
                             <td>{{ $incident->created_at }}</td>
                             <td>{{ $incident->title_short }}</td>
 
@@ -68,10 +72,14 @@
                     <tbody id="dashboard_no_responsible">
                     @foreach($pending_incidents as $incident)
                         <tr>
-                            <td>{{ $incident->id }}</td>
+                            <td>
+                                <a href="/ver/{{ $incident->id }}">
+                                    {{ $incident->id }}
+                                </a>
+                            </td>
                             <td>{{ $incident->category->name }}</td>
                             <td>{{ $incident->severity_full }}</td>
-                            <td>{{ $incident->id }}</td>
+                            <td>{{ $incident->state }}</td>
                             <td>{{ $incident->created_at }}</td>
                             <td>{{ $incident->title_short }}</td>
                             <td>
@@ -110,10 +118,14 @@
                     <tbody id="dashboard_to_others">
                     @foreach($incidents_by_me as $incident)
                         <tr>
-                            <td>{{ $incident->id }}</td>
+                            <td>
+                                <a href="/ver/{{ $incident->id }}">
+                                    {{ $incident->id }}
+                                </a>
+                            </td>
                             <td>{{ $incident->category->name }}</td>
                             <td>{{ $incident->severity_full }}</td>
-                            <td>{{ $incident->id }}</td>
+                            <td>{{ $incident->state }}</td>
                             <td>{{ $incident->created_at }}</td>
                             <td>{{ $incident->title_short }}</td>
                             <td>{{ $incident->support_id ?: 'Sin asignar'}}</td>

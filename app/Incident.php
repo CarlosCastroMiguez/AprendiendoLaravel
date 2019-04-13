@@ -12,6 +12,17 @@ class Incident extends Model
         return $this->belongsTo('App\category');
     }
     
+    public function project(){
+        return $this->belongsTo('App\project');
+    }
+    
+    public function support(){
+        return $this->belongsTo('App\user', 'support_id');
+    }
+    
+    public function client(){
+        return $this->belongsTo('App\user', 'client_id');
+    }
     
     public function getSeverityFullAttribute(){
         
@@ -31,4 +42,29 @@ class Incident extends Model
         
     }
    
+    public function getCategoryNameAttribute(){
+        if($this->category){
+            return $this->category->name;
+        }
+        else
+            return 'general';
+    }
+    
+    public function getSupportNameAttribute(){
+        if($this->support){
+            return $this->support->name;
+        }
+        else
+            return 'Sin asignar';
+    }
+    
+    public function getStateAttribute(){
+        if($this->active == 0){
+            return 'Resuelto';
+        }
+        if($this->support_id)
+            return 'Asignado';
+        
+        return 'Pendiente';
+    }
 }

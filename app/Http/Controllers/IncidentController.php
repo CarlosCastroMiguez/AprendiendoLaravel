@@ -16,11 +16,16 @@ class IncidentController extends Controller
         $this->middleware('auth');
     }
     
+    public function show($id) {
+        
+        $incident = Incident::findOrFail($id);
+        return view ('incidents.show')->with(compact('incident'));
+    }
     
     public function create() {
         
         $categories = Category::where('project_id', auth()->user()->selected_project_id)-> get();
-        return view('report')->with(compact('categories'));
+        return view('incidents.create')->with(compact('categories'));
     }
     public function store(Request $request) {
         //Forma 1 de crear incident: 
