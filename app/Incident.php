@@ -16,6 +16,10 @@ class Incident extends Model
         return $this->belongsTo('App\project');
     }
     
+    public function level(){
+        return $this->belongsTo('App\level');
+    }
+    
     public function support(){
         return $this->belongsTo('App\user', 'support_id');
     }
