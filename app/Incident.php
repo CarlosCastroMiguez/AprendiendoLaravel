@@ -8,6 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Incident extends Model
 {
+    //validation
+    public static $rules = [
+        'category_id' => 'sometimes|exists:categories,id',
+        'severity' => 'required|in:M,N,A',
+        'title' => 'required|min:5',
+        'description' => 'required|min:15',
+    ];
+
+    public static $messages = [
+        'category_id.exists' => 'La categoria seleccionada no existe en nuestra BBDD',
+        'title.required' => 'Es necesario ingresar un título para la incidencia',
+        'title.min' => 'El titulo debe presentar al menos 5 caracteres', 
+        'description.required' => 'Es necesario ingresar una descripción para la incidencia',
+        'description.min' => 'La descripción debe presentar al menos 15 caracteres', 
+    ];
+    
+    
     public function category(){
         return $this->belongsTo('App\category');
     }

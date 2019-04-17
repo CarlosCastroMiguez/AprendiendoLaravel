@@ -82,7 +82,7 @@
 
         </table>
         
-        @if($incident->support_id == null && $incident->active)
+        @if($incident->support_id == null && $incident->active && auth()->user()->canTake($incident))
         <a href="/incidencia/{{$incident->id}}/atender" class="btn btn-primary" title="Atender" id="incident_apply">
             Atender incidencia
         </a>
@@ -90,22 +90,23 @@
         @if(auth()->user()->id == $incident->client_id)
             
             @if($incident->active)
-            <a href="/incidencia/{{$incident->id}}/resolver" class="btn btn-info" title="Atender" id="incident_solve">
+            <a href="/incidencia/{{$incident->id}}/resolver" class="btn btn-info" title="Resolver" id="incident_solve">
                 Marcar como resuelta
             </a>
+            <a a href="/incidencia/{{$incident->id}}/editar" class="btn btn-success" title="Editar" id="incident_edit">
+                 Editar incidencia
+            </a>
             @else
-            <a href="/incidencia/{{$incident->id}}/abrir" class="btn btn-info" title="Atender" id="incident_open">
+            <a href="/incidencia/{{$incident->id}}/abrir" class="btn btn-info" title="Abrir" id="incident_open">
                 Volver a abrir incidencia
             </a>
             @endif
         @endif
         
-        <a a href="/incidencia/{{$incident->id}}/editar" class="btn btn-success" title="Atender" id="incident_edit">
-            Editar incidencia
-        </a>
+       
         
         @if(auth()->user()->id == $incident->support_id && $incident-> active)
-        <a href="/incidencia/{{$incident->id}}/derivar" class="btn btn-danger" title="Atender" id="incident_derive">
+        <a href="/incidencia/{{$incident->id}}/derivar" class="btn btn-danger" title="Derivar" id="incident_derive">
             Derivar al siguiente nivel
         </a>
         @endif

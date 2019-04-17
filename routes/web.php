@@ -23,12 +23,14 @@ Route::get('/seleccionar/proyecto/{id}', 'HomeController@selectProject');
 Route::get('/report','IncidentController@create');
 Route::post('/report','IncidentController@store');
 
+Route::get('/incidencia/{id}/editar','IncidentController@edit');
+Route::post('/incidencia/{id}/editar','IncidentController@update');
+
 Route::get('/ver/{id}','IncidentController@show');
 
 Route::get('/incidencia/{id}/atender','IncidentController@take');
 Route::get('/incidencia/{id}/resolver','IncidentController@solve');
 Route::get('/incidencia/{id}/abrir','IncidentController@open');
-Route::post('/incidencia/{id}/editar','IncidentController@edit');
 Route::get('/incidencia/{id}/derivar','IncidentController@nextLevel');
 
 

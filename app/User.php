@@ -36,6 +36,13 @@ class User extends Authenticatable
         
     }
     
+    public function canTake(Incident $incident){
+        
+        return ProjectUser::where('user_id', auth()->user()->id)
+                                ->where('level_id', $incident->level_id)
+                                    ->first();
+        
+    }
     
     
     //accesors

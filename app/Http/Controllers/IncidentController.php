@@ -32,22 +32,9 @@ class IncidentController extends Controller
         //Forma 1 de crear incident: 
         //Incident::create($request->all());
         
-        $rules = [
-            'category_id' => 'sometimes|exists:categories,id',
-            'severity' => 'required|in:M,N,A',
-            'title' => 'required|min:5',
-            'description' => 'required|min:15',
-        ];
         
-        $messages = [
-            'category_id.exists' => 'La categoria seleccionada no existe en nuestra BBDD',
-            'title.required' => 'Es necesario ingresar un título para la incidencia',
-            'title.min' => 'El titulo debe presentar al menos 5 caracteres', 
-            'description.required' => 'Es necesario ingresar una descripción para la incidencia',
-            'description.min' => 'La descripción debe presentar al menos 15 caracteres', 
-        ];
         //si la validacion no se cumple no se avanza
-        $this->validate($request, $rules, $messages );
+        $this->validate($request, Incident::$rules, Incident::$messages );
         
         //Forma 2 de crear incident:
         $incident = new Incident();
@@ -119,8 +106,31 @@ class IncidentController extends Controller
         return back();
     }
     public function edit($id){
+        
         $incident = Incident::findOrFail($id);
+        $categories = $incident->project->categories;
+        
+        return view('incidents.edit')->with(compact('incident', 'categories'));
     }
+    
+    public function update(Request $request, $id){
+        
+        $this->validate($request, Incident::$rules, Incident::$messages );
+        
+        $incident = Incident::findOrFail($id);
+        
+        $incident->category_id = $request->input('category_id') ?: null;
+        $incident->severity = $request->input('severity');
+        $incident->title = $request->input('title');
+        $incident->description = $request->input('description');
+                
+        $incident->save();
+        
+        return redirect ("/ver/$id");
+        
+        
+    }
+    
     public function nextLevel($id){
         $incident = Incident::findOrFail($id);
         $level_id = $incident->level_id;
@@ -132,6 +142,7 @@ class IncidentController extends Controller
         
         if($next_level_id ){
             $incident->level_id = $next_level_id;
+            $incident->support_id = null;
             $incident->save();
             
             return back();
